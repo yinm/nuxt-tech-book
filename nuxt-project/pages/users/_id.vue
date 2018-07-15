@@ -1,10 +1,16 @@
 <template>
   <div>
-    <h1>/users/_id.vue</h1>
+    <h1>{{ id }}</h1>
   </div>
 </template>
 
 <script>
   export default {
+    asyncData({ params }) {
+      const { id } = params
+      return {
+        id
+      }
+    }
   }
 </script>
