@@ -6,13 +6,16 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
-    async asyncData({ params, app }) {
+    async asyncData({ params, store }) {
       const { id } = params
-      const user = await app.$axios.$get(
-        `https://api.github.com/users/${id}`
-      )
-      return { user }
-    }
+      await store.dispatch('getUser', { id })
+      return {}
+    },
+    computed: {
+      ...mapGetters([ 'user' ])
+    },
   }
 </script>
