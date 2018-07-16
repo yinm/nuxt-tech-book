@@ -23,6 +23,7 @@ module.exports = {
   ],
   plugins: [
     '~/plugins/axios',
+    '~/plugins/logger',
   ],
   /*
   ** Build configuration
