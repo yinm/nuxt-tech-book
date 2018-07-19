@@ -25,6 +25,9 @@ module.exports = {
     '~/plugins/axios',
     '~/plugins/logger',
   ],
+  router: {
+    middleware: ['auth']
+  },
   /*
   ** Build configuration
   */
