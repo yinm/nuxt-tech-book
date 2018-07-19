@@ -18,13 +18,13 @@ app.get('/api/todos', (req, res) => {
   })
 })
 
-const config = require('../nuxt.config')
+const config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
 
 const nuxt = new Nuxt(config)
 
 if (config.dev) {
-  const builder = new Builder
+  const builder = new Builder(nuxt)
   builder.build()
 }
 
