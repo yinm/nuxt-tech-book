@@ -8,6 +8,16 @@ const bodyParser = require('body-parser')
 app.set('port', port)
 app.use('/api/', bodyParser.json())
 
+app.get('/api/todos', (req, res) => {
+  res.json({
+    todos: [
+      { id: 1, name: 'First Todo' },
+      { id: 2, name: 'Second Task' },
+      { id: 3, name: 'Third Task' }
+    ]
+  })
+})
+
 const config = require('../nuxt.config')
 config.dev = !(process.env.NODE_ENV === 'production')
 
