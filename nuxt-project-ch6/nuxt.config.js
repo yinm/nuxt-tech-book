@@ -17,6 +17,16 @@ module.exports = {
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy',
+  ],
+  axios: {
+    prefix: '/api/v2',
+  },
+  proxy: {
+    '/api/v2': 'http://qiita.com',
+  },
   /*
   ** Build configuration
   */
