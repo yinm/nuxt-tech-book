@@ -1,65 +1,33 @@
 <template>
   <section class="container">
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        nuxt-project-ch6
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
+    <ul>
+      <li v-for="user in users" :key="user.id">
+        <p>
+          <img :src="user.profile_image_url" alt=""><br>
+          <strong>{{ user.id }}</strong><br>
+          {{ user.description }}
+        </p>
+      </li>
+    </ul>
   </section>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
+  import AppLogo from '../components/AppLogo'
 
-export default {
-  components: {
-    AppLogo
+  export default {
+    async asyncData({ app }) {
+      const users = await app.$axios.$get('/users')
+      return {
+        users
+      }
+    }
   }
-}
 </script>
 
 <style>
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
+  p {
+    margin: 0 0 16px;
+    line-height: 1.5;
+  }
 </style>
-
