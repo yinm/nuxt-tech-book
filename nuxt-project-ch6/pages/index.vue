@@ -1,33 +1,50 @@
 <template>
   <section class="container">
-    <ul>
-      <li v-for="user in users" :key="user.id">
-        <p>
-          <img :src="user.profile_image_url" alt=""><br>
-          <strong>{{ user.id }}</strong><br>
-          {{ user.description }}
-        </p>
-      </li>
-    </ul>
+    <div v-if="active">
+      <p v-if="isOnline" class="is-online">
+        Application is online
+      </p>
+      <p v-else class="is-offline">
+        Application is offline.
+      </p>
+    </div>
   </section>
 </template>
 
 <script>
-  import AppLogo from '../components/AppLogo'
-
-  export default {
-    async asyncData({ app }) {
-      const users = await app.$axios.$get('/users')
-      return {
-        users
-      }
+export default {
+  data () {
+    return {
+      active: false,
+      isOnline: false
     }
+  },
+  mounted () {
+    this.active = true
+    this.isOnline = navigator.onLine
   }
+}
 </script>
 
 <style>
-  p {
-    margin: 0 0 16px;
-    line-height: 1.5;
-  }
+
+.is-online {
+  color: #62C082;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.is-offline {
+  color: #F64F45;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 </style>
